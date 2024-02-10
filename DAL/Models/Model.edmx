@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TaskManagmentSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ParentID" Type="bigint" />
+          <Property Name="TaskID" Type="bigint" Nullable="false" />
+          <Property Name="UserID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="LKP_TaskStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LKP_UserType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Attachment" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="bigint" />
+          <Property Name="TaskStatusID" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="UserTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Comment_Comment">
+          <End Role="Comment" Type="Self.Comment" Multiplicity="0..1" />
+          <End Role="Comment1" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_CommentedUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_LKP_TaskStatus">
+          <End Role="LKP_TaskStatus" Type="Self.LKP_TaskStatus" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_TaskStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="TaskStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_LKP_UserType">
+          <End Role="LKP_UserType" Type="Self.LKP_UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_UserType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TaskManagmentSystemModelStoreContainer">
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LKP_TaskStatus" EntityType="Self.LKP_TaskStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LKP_UserType" EntityType="Self.LKP_UserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comment_Comment" Association="Self.FK_Comment_Comment">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Comment1" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_CommentedUser" Association="Self.FK_Comment_CommentedUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Task" Association="Self.FK_Comment_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_LKP_TaskStatus" Association="Self.FK_Task_LKP_TaskStatus">
+            <End Role="LKP_TaskStatus" EntitySet="LKP_TaskStatus" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User" Association="Self.FK_Task_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_LKP_UserType" Association="Self.FK_User_LKP_UserType">
+            <End Role="LKP_UserType" EntitySet="LKP_UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TaskManagmentSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TaskManagmentSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="TaskManagmentSystemModel.Comment" />
+          <EntitySet Name="LKP_TaskStatus" EntityType="TaskManagmentSystemModel.LKP_TaskStatus" />
+          <EntitySet Name="LKP_UserType" EntityType="TaskManagmentSystemModel.LKP_UserType" />
+          <EntitySet Name="Tasks" EntityType="TaskManagmentSystemModel.Task" />
+          <EntitySet Name="Users" EntityType="TaskManagmentSystemModel.User" />
+          <AssociationSet Name="FK_Comment_Comment" Association="TaskManagmentSystemModel.FK_Comment_Comment">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="Comment1" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_CommentedUser" Association="TaskManagmentSystemModel.FK_Comment_CommentedUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Task" Association="TaskManagmentSystemModel.FK_Comment_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_LKP_TaskStatus" Association="TaskManagmentSystemModel.FK_Task_LKP_TaskStatus">
+            <End Role="LKP_TaskStatus" EntitySet="LKP_TaskStatus" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_LKP_UserType" Association="TaskManagmentSystemModel.FK_User_LKP_UserType">
+            <End Role="LKP_UserType" EntitySet="LKP_UserType" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User" Association="TaskManagmentSystemModel.FK_Task_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Int64" />
+          <Property Name="TaskID" Type="Int64" Nullable="false" />
+          <Property Name="UserID" Type="Int64" />
+          <NavigationProperty Name="Comment1" Relationship="TaskManagmentSystemModel.FK_Comment_Comment" FromRole="Comment" ToRole="Comment1" />
+          <NavigationProperty Name="Comment2" Relationship="TaskManagmentSystemModel.FK_Comment_Comment" FromRole="Comment1" ToRole="Comment" />
+          <NavigationProperty Name="User" Relationship="TaskManagmentSystemModel.FK_Comment_CommentedUser" FromRole="Comment" ToRole="User" />
+          <NavigationProperty Name="Task" Relationship="TaskManagmentSystemModel.FK_Comment_Task" FromRole="Comment" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="LKP_TaskStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tasks" Relationship="TaskManagmentSystemModel.FK_Task_LKP_TaskStatus" FromRole="LKP_TaskStatus" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="LKP_UserType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="TaskManagmentSystemModel.FK_User_LKP_UserType" FromRole="LKP_UserType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int64" />
+          <Property Name="TaskStatusID" Type="Int32" />
+          <NavigationProperty Name="Comments" Relationship="TaskManagmentSystemModel.FK_Comment_Task" FromRole="Task" ToRole="Comment" />
+          <NavigationProperty Name="LKP_TaskStatus" Relationship="TaskManagmentSystemModel.FK_Task_LKP_TaskStatus" FromRole="Task" ToRole="LKP_TaskStatus" />
+          <NavigationProperty Name="User" Relationship="TaskManagmentSystemModel.FK_Task_User" FromRole="Task" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="TaskManagmentSystemModel.FK_Comment_CommentedUser" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="LKP_UserType" Relationship="TaskManagmentSystemModel.FK_User_LKP_UserType" FromRole="User" ToRole="LKP_UserType" />
+          <NavigationProperty Name="Tasks" Relationship="TaskManagmentSystemModel.FK_Task_User" FromRole="User" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_Comment_Comment">
+          <End Type="TaskManagmentSystemModel.Comment" Role="Comment" Multiplicity="0..1" />
+          <End Type="TaskManagmentSystemModel.Comment" Role="Comment1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_CommentedUser">
+          <End Type="TaskManagmentSystemModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TaskManagmentSystemModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Task">
+          <End Type="TaskManagmentSystemModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="TaskManagmentSystemModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_LKP_TaskStatus">
+          <End Type="TaskManagmentSystemModel.LKP_TaskStatus" Role="LKP_TaskStatus" Multiplicity="0..1" />
+          <End Type="TaskManagmentSystemModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_TaskStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="TaskStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_LKP_UserType">
+          <End Type="TaskManagmentSystemModel.LKP_UserType" Role="LKP_UserType" Multiplicity="1" />
+          <End Type="TaskManagmentSystemModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_UserType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User">
+          <End Type="TaskManagmentSystemModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TaskManagmentSystemModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TaskManagmentSystemModelStoreContainer" CdmEntityContainer="TaskManagmentSystemEntities">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="TaskManagmentSystemModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_TaskStatus">
+            <EntityTypeMapping TypeName="TaskManagmentSystemModel.LKP_TaskStatus">
+              <MappingFragment StoreEntitySet="LKP_TaskStatus">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_UserType">
+            <EntityTypeMapping TypeName="TaskManagmentSystemModel.LKP_UserType">
+              <MappingFragment StoreEntitySet="LKP_UserType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="TaskManagmentSystemModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="TaskStatusID" ColumnName="TaskStatusID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TaskManagmentSystemModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

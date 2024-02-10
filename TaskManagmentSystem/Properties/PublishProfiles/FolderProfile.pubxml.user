@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_NewBackgroundProfile>True</_NewBackgroundProfile>
+    <_PublishTargetUrl>M:\Projects architecture\Andalusia Sructure\TaskManagmentSystem\TaskManagmentSystem\TaskManagmentSystem\publish</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Autofac.dll">
+      <publishTime>11/26/2016 22:45:55</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.WebApi.dll">
+      <publishTime>11/27/2016 13:19:43</publishTime>
+    </File>
+    <File Include="bin/BCrypt.Net.dll">
+      <publishTime>11/27/2016 20:46:46</publishTime>
+    </File>
+    <File Include="bin/BL.dll">
+      <publishTime>07/24/2019 21:49:32</publishTime>
+    </File>
+    <File Include="bin/BL.dll.config">
+      <publishTime>11/26/2016 21:29:34</publishTime>
+    </File>
+    <File Include="bin/DAL.dll">
+      <publishTime>07/24/2019 21:49:31</publishTime>
+    </File>
+    <File Include="bin/DAL.dll.config">
+      <publishTime>11/27/2016 18:32:56</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>11/26/2016 14:23:35</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>11/26/2016 14:23:35</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.Common.dll">
+      <publishTime>02/12/2014 01:17:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.DataVisualization.dll">
+      <publishTime>02/12/2014 01:17:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.ProcessingObjectModel.dll">
+      <publishTime>02/12/2014 01:17:38</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>11/28/2016 18:57:54</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>11/28/2016 18:57:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>11/28/2016 18:57:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>11/28/2016 18:57:54</publishTime>
+    </File>
+    <File Include="bin/TaskManagmentSystem.dll">
+      <publishTime>07/24/2019 21:49:32</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>11/26/2016 14:12:56</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>07/24/2019 21:31:30</publishTime>
+    </File>
+    <File Include="TaskManagmentDS.xsc">
+      <publishTime>11/29/2016 23:44:04</publishTime>
+    </File>
+    <File Include="TaskManagmentDS.xss">
+      <publishTime>11/29/2016 23:44:04</publishTime>
+    </File>
+    <File Include="UI/Pages/AddEditTask/AddEditTask.aspx">
+      <publishTime>11/29/2016 22:10:34</publishTime>
+    </File>
+    <File Include="UI/Pages/AddEditTask/AddEditTask.js">
+      <publishTime>11/30/2016 00:03:15</publishTime>
+    </File>
+    <File Include="UI/Pages/AddEditUser/AddEditUser.aspx">
+      <publishTime>11/29/2016 19:10:19</publishTime>
+    </File>
+    <File Include="UI/Pages/AddEditUser/AddEditUser.js">
+      <publishTime>07/24/2019 21:47:26</publishTime>
+    </File>
+    <File Include="UI/Pages/EmployeeHome/EmployeeHome.aspx">
+      <publishTime>11/29/2016 09:16:42</publishTime>
+    </File>
+    <File Include="UI/Pages/EmployeeHome/EmployeeHome.js">
+      <publishTime>11/29/2016 09:32:35</publishTime>
+    </File>
+    <File Include="UI/Pages/Home/Home.aspx">
+      <publishTime>11/29/2016 23:54:06</publishTime>
+    </File>
+    <File Include="UI/Pages/Home/home.js">
+      <publishTime>11/30/2016 00:03:15</publishTime>
+    </File>
+    <File Include="UI/Pages/LogIn/LogIn.aspx">
+      <publishTime>11/29/2016 18:34:53</publishTime>
+    </File>
+    <File Include="UI/Pages/LogIn/login.js">
+      <publishTime>11/30/2016 00:04:13</publishTime>
+    </File>
+    <File Include="UI/Pages/TMS.js">
+      <publishTime>11/29/2016 14:21:16</publishTime>
+    </File>
+    <File Include="UI/Pages/TMS.Master">
+      <publishTime>11/29/2016 18:44:03</publishTime>
+    </File>
+    <File Include="UI/Template/css/bootstrap.min.css">
+      <publishTime>11/26/2016 19:34:23</publishTime>
+    </File>
+    <File Include="UI/Template/css/styles.css">
+      <publishTime>11/29/2016 17:52:58</publishTime>
+    </File>
+    <File Include="UI/Template/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>11/26/2016 19:34:23</publishTime>
+    </File>
+    <File Include="UI/Template/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>11/26/2016 19:34:23</publishTime>
+    </File>
+    <File Include="UI/Template/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>11/26/2016 19:34:23</publishTime>
+    </File>
+    <File Include="UI/Template/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>11/26/2016 19:34:23</publishTime>
+    </File>
+    <File Include="UI/Template/js/bootstrap.min.js">
+      <publishTime>11/26/2016 19:34:23</publishTime>
+    </File>
+    <File Include="UI/Template/js/jquey2.0.2.min.js">
+      <publishTime>11/28/2016 11:21:18</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/24/2019 21:49:33</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

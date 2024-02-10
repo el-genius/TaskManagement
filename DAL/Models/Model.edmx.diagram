@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e35ecc8a0474324b0194c3ec2a23123" Name="Diagram1">
+        <EntityTypeShape EntityType="TaskManagmentSystemModel.Comment" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="TaskManagmentSystemModel.LKP_TaskStatus" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="TaskManagmentSystemModel.LKP_UserType" Width="1.5" PointX="1.5" PointY="8.5" />
+        <EntityTypeShape EntityType="TaskManagmentSystemModel.Task" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="TaskManagmentSystemModel.User" Width="1.5" PointX="0.75" PointY="5" />
+        <AssociationConnector Association="TaskManagmentSystemModel.FK_Comment_Comment" />
+        <AssociationConnector Association="TaskManagmentSystemModel.FK_Comment_CommentedUser" />
+        <AssociationConnector Association="TaskManagmentSystemModel.FK_Comment_Task" />
+        <AssociationConnector Association="TaskManagmentSystemModel.FK_Task_LKP_TaskStatus" />
+        <AssociationConnector Association="TaskManagmentSystemModel.FK_User_LKP_UserType" />
+        <AssociationConnector Association="TaskManagmentSystemModel.FK_Task_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
